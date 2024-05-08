@@ -29,12 +29,12 @@ function ThingViewer({ thing, disableEditing, disableDeleting }: Props) {
         saveSolidDatasetAt(url, removed, { fetch: fetch }).then(fetchResource).catch(alert)
     }
 
-    function editThing(event) {
+    function editThing(event: React.FormEvent) {
         event.preventDefault();
         let localThing = thing;
         for (const predicate of Object.keys(thing.predicates)) {
-            const predicateValue = event.target[`${predicate}_value`].value
-            localThing = setStringNoLocale(localThing, predicate, predicateValue)
+            const predicateValue = (event.target as HTMLFormElement)[`${predicate}_value`].value;
+            localThing = setStringNoLocale(localThing, predicate, predicateValue);
         }
         const newDataset = setThing(dataset, localThing)
 
