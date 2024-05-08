@@ -9,6 +9,7 @@ interface ResourceContextType {
     fetchResource: () => void 
     url: string | null
     error: ResourceError | null
+    serverUI: boolean
 }
 
 type ResourceError = {
@@ -60,7 +61,7 @@ export function ResourceProvider({ children }: { children: ReactNode }) {
     }, [url])
 
     return (
-        <ResourceContext.Provider value={{ resource, fetchResource, url, error }}>
+        <ResourceContext.Provider value={{ resource, fetchResource, url, error, serverUI: false }}>
             {children}
         </ResourceContext.Provider>
     )

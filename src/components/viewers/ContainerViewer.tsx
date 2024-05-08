@@ -8,7 +8,7 @@ import FieldSet from "../ui/FieldSet"
 
 function ContainerViewer() {
     const { isContainer, resources } = useContainer()
-    const { fetchResource } = useResource()
+    const { fetchResource, serverUI } = useResource()
 
     const { url } = useUrl()
 
@@ -44,7 +44,7 @@ function ContainerViewer() {
         <FieldSet header="Contained Resources:">
             {resources.map(url => (
                 <li key={url}>
-                    <Link to={`/explore/?url=${encodeURIComponent(url)}`}>{url}</Link>
+                    <Link to={serverUI ? url : `/explore/?url=${encodeURIComponent(url)}`}>{url}</Link>
                 </li>
             ))}
             <div className="mt-2">
