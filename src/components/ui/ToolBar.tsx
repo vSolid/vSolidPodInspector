@@ -6,7 +6,7 @@ import { useResource } from "../../contexts/resource";
 import { useRoot } from "../../hooks/root";
 
 export default function Toolbar() {
-    const { resource, url } = useResource()
+    const { resource, url, serverUI } = useResource()
     const navigate = useNavigate()
     const root = useRoot(url ?? "")
     const [localUrl, setLocalUrl] = useState<string | null>(url);
@@ -25,7 +25,11 @@ export default function Toolbar() {
         }
         const withoutTrailingSlash = url.endsWith('/') ? url.substring(0, url.length - 2) : url
         const newUrl = withoutTrailingSlash.substring(0, withoutTrailingSlash.lastIndexOf('/')) + '/';
-        navigate(`/explore/?url=${encodeURIComponent(newUrl)}`)
+        if (serverUI) {
+            navigate(new URL(newUrl).pathname)
+        } else {
+            navigate(`/explore/?url=${encodeURIComponent(newUrl)}`)
+        }
     }
 
     function getResourceType() : string | null {

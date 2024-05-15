@@ -41,7 +41,7 @@ export function ServerUI() {
   return (
     <div className="lg:w-1/2 m-auto lg:my-8">
       <ResourceContext.Provider
-        value={{ resource, fetchResource, url: location.pathname, error: null, serverUI: true }}
+        value={{ resource, fetchResource, url: window.location.href, error: null, serverUI: true }}
       >
         <Toolbar />
         <Explorer />
